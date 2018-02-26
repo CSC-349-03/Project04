@@ -15,7 +15,7 @@ public class ChangeMaker {
 		Scanner scanner = new Scanner(System.in);
 		while (run)
 		{
-			System.out.println("Enter data for the problem");
+			System.out.println("Enter the number of cont-denominations and the set of coin values:");
 			if (scanner.hasNextInt())
 			{
 				int k = scanner.nextInt();
@@ -24,7 +24,7 @@ public class ChangeMaker {
 				{
 					D[i] = scanner.nextInt();
 				}
-				System.out.println("Enter a value for n, the amount of change you want");
+				System.out.println("Enter a positive amount to be changed (enter 0 to quit):"); // TODO: Implement 0 to quit
 				int n = scanner.nextInt();
 				int[] A = change_DP(n, D);
                 int[] B = change_greedy(n, D);
