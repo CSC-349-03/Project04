@@ -42,16 +42,16 @@ public class ChangeMaker {
 
 	/* Bottom up solution to change problem */
     public static int[] change_DP(int n, int[] d){
-        int[] C = new int[n+1];
+        int[] C = new int[n + 1];
         C[1] = 1;
         int dlen = d.length;
-        int[][] A = new int[n][dlen+1]; /* Stores coin combos for optimal scores, last spot is number of coins */
+        int[][] A = new int[n][dlen]; /* Stores coin combos for optimal scores, last spot is number of coins */
         A[0][dlen-1] = 1;
-        A[0][dlen] = 1;
+        //A[0][dlen] = 1;
         for (int i = 2; i < n+1; i++)
         {
             C[i] = 1 + findMin(C, d, A, i, dlen);
-            A[i-1][dlen] = C[i];
+            //A[i-1][dlen] = C[i];
             /* Debug
             // TODO: Fix A array
             System.out.print("A:");
@@ -118,6 +118,7 @@ public class ChangeMaker {
 	private static void printChangeDP(int[] A, int[] D, int dlen, int n, boolean isDP)
 	{
 		int starter = 0;
+		int count = 0;
 		while ((A[starter] == 0) && (starter < dlen))
 		{
 			starter++;
@@ -131,15 +132,17 @@ public class ChangeMaker {
 		System.out.print("Optimal Distribution: ");
 		System.out.print(A[starter] + "*" + D[starter] + "c");
 		starter++;
+		count += A[starter];
 		for (int i = starter; i < dlen; i++)
 		{
 			if (A[i] != 0)
 			{
 				System.out.print(" + " + A[i] + "*" + D[i] + "c");;
+				count += A[i];
 			}
 		}
 		System.out.println("");
-		System.out.println("Optimal coin count: " + A[dlen]);
+		System.out.println("Optimal coin count: " + count);
 	}
 
 	/* Copies some ints from A to B. If B is null A is filled with zeroes */
